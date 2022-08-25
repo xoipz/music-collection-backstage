@@ -1,0 +1,23 @@
+{
+  "name": "music-collection-backstage",
+  "version": "1.0.0",
+  "description": "使用node写的音乐收集站后端",
+  "main": "app.js",
+  "scripts": {
+    "bg": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoipz/music-collection-backstage.git"
+  },
+  "author": "XOIPZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xoipz/music-collection-backstage/issues"
+  },
+  "homepage": "https://github.com/xoipz/music-collection-backstage#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  }
+}

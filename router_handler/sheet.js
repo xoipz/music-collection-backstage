@@ -1,3 +1,5 @@
+const safeJsonStringify = require("safe-json-stringify");
+const { api } = require("./hock/useapi");
 /**
  * 在这里定义和用户相关的路由处理函数，供 /router/ces.js 模块进行调用
  */
@@ -8,19 +10,29 @@ const db = new NeDB({
 });
 
 // 添加歌单
-const add = (req, res) => {
-  // db.insert(
-  //   {
-  //     name: "Alice",
-  //     age: 20,
-  //     rank: 1,
-  //   },
-  //   (err, doc) => {
-  //     console.log("inserted:", err,doc);
-  //   }
-  // );
+const addsheet = (req, res) => {
+  const body = req.body;
+  //数据判空
+  if (!body) {
+    res.send({ msg: "获得值为空" });
+    return;
+  }
 
-  res.send("reguser OK");
+  const result = api();
+
+  // 歌单
+  const sheet = {
+    type: body.type,
+    sheetname: body.sheetname,
+    sheetid: "",
+    songs: [],
+    creater: body.creater,
+    authorid: [],
+  };
+
+  result.setdata(sheet);
+
+  res.send(result.get());
 };
 
 // 登录的处理函数
@@ -30,15 +42,14 @@ const login = (req, res) => {
 
 // 登录的处理函数
 const get = (req, res) => {
-  db.find({}, (err, docs)=> {
-    console.log('Alice found:',err, docs)
-})
+  db.find({}, (err, docs) => {
+    console.log("Alice found:", err, docs);
+  });
   res.send({ msg: "get OK" });
 };
 
-
 module.exports = {
-  add,
+  addsheet,
   login,
-  get
+  get,
 };

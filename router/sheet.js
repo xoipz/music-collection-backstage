@@ -1,18 +1,20 @@
 const express = require('express')
 const router = express.Router()
 
+
+
+
 // 导入用户路由处理函数模块
 const Handler = require('../router_handler/sheet')
 
 
 //添加歌单
-router.get('/add', Handler.add)
+router.post('/addsheet', Handler.addsheet)
+
+
+
 // 查询歌单
 // router.get('/find', Handler.find)
-
-
-
-
 
 
 // 登录

@@ -1,37 +1,33 @@
 const safeJsonStringify = require("safe-json-stringify");
 const { api } = require("./hock/useapi");
-/**
- * 在这里定义和用户相关的路由处理函数，供 /router/ces.js 模块进行调用
- */
 const NeDB = require("nedb");
 const db = new NeDB({
   filename: "./db/sheet.db",
   autoload: true,
+  corruptAlertThreshold: 1, //不在乎文件被修改，0这在乎
 });
 
 // 添加歌单
 const addsheet = (req, res) => {
   const body = req.body;
-  //数据判空
-  if (!body) {
-    res.send({ msg: "获得值为空" });
-    return;
-  }
-
   const result = api();
 
   // 歌单
   const sheet = {
     type: body.type,
     sheetname: body.sheetname,
-    sheetid: "",
+    // sheetid: "",
+    sheetimg: body.sheetimg,
     songs: [],
     creater: body.creater,
     authorid: [],
   };
 
-  result.setdata(sheet);
+  db.insert({ ...sheet }, (err, docs) => {
+    console.log("Alice found:", err, docs);
+  });
 
+  result.setdata(sheet);
   res.send(result.get());
 };
 

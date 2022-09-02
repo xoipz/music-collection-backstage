@@ -1,6 +1,6 @@
 const safeJsonStringify = require("safe-json-stringify");
 
-function api(){
+function api() {
   this.code = 200;
   this.data = {};
   this.msg = "";
@@ -14,28 +14,28 @@ function api(){
     return result;
   };
 
-  const setcode = (code) =>{
-    this.code = code
-  }
+  const setcode = (code) => {
+    this.code = code;
+  };
 
-  const setdata = (data) =>{
-    this.data = data
-  }
+  const setdata = (data) => {
+    this.data = data;
+  };
 
-  const setmsg = (msg) =>{
-    this.msg = msg
-  }
+  const setmsg = (msg, code) => {
+    if (code) {
+      this.code = code;
+    }
+    this.msg = msg;
+  };
 
   return {
     get,
     setcode,
     setdata,
-    setmsg
+    setmsg,
   };
-};
-
-
-
+}
 
 module.exports = {
   api,

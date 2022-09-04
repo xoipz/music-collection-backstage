@@ -3,6 +3,7 @@ const router = express.Router()
 // 引入导入模块
 const multiparty = require('multiparty');
 const fs = require("fs");
+const { api } = require('../router_handler/hock/useapi');
 
 /**
  * TODO
@@ -15,7 +16,7 @@ const fs = require("fs");
 
 
 // 上传文件
-router.post("/", (req, res)=> {
+router.post("/upload", (req, res)=> {
   /* 生成multiparty对象，并配置上传目标路径 */
   let form = new multiparty.Form();
   /* 设置编辑 */
@@ -43,4 +44,15 @@ router.post("/", (req, res)=> {
     };
   })
 })
+
+router.get("/test",(req,res)=>{
+  const result = new api()
+  result.setcode(200)
+  result.setmsg("链接成功")
+  res.send(result.get())
+})
+
+
+
+
 module.exports = router;

@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const sheetRouter = require("./router/sheet");
-const uploadRouter = require("./router/upload");
+const commonRouter = require("./router/common");
 
 // 创建 express 的服务器实例
 const app = express();
@@ -15,6 +15,10 @@ app.use((req, res, next) => {
   // console.log(res.cc)
   next();
 });
+
+
+//使用跨域
+app.use(cors());
 
 // 响应数据的中间件
 // app.use((req, res, next) => {
@@ -31,10 +35,8 @@ app.use((req, res, next) => {
 // });
 
 app.use("/sheet", sheetRouter);
-app.use("/upload",uploadRouter)
+app.use("/common",commonRouter)
 
-//使用跨域
-app.use(cors());
 
 // TODO
 app.use(express.urlencoded({ extended: false }));

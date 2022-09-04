@@ -8,11 +8,11 @@ const Handler = require("../router_handler/sheet");
 router.post("/addsheet", Handler.addsheet);
 
 // 查询歌单
-// router.get('/find', Handler.find)
+router.get('/getsheet', Handler.getsheet)
 
 // 登录
-router.get("/login", Handler.login);
+// router.get("/login", Handler.login);
 // 登录
-router.get("/get", Handler.get);
+// router.get("/get", Handler.get);
 
 module.exports = router;

@@ -9,8 +9,9 @@ function api() {
     let result = {
       code: this.code,
     };
-    if (safeJsonStringify(data) != "{}") result.data = this.data;
-    if (msg != "") result.msg = this.msg;
+    const data = safeJsonStringify(this.data);
+    if (data != "{}") result.data = JSON.parse(data);
+    if (this.msg != "") result.msg = this.msg;
     return result;
   };
 

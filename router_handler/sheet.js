@@ -20,12 +20,11 @@ const addsheet = (req, res) => {
     type: body.type || "null",
     sheetname: body.sheetname || "sheetname",
     sheetimg: body.sheetimg || "",
-    describe:body.describe||"",
+    describe: body.describe || "",
     songs: [],
     creater: body.creater || "user",
     authorid: body.authorid || [],
   };
-
 
   const insert = () => {
     let promise = new Promise((resolve, reject) => {
@@ -58,24 +57,26 @@ const getsheet = (req, res) => {
     let promise = new Promise((resolve, reject) => {
       let finddata = {};
 
-      db.find(finddata).sort({createdAt:1}).exec((err, docs) => {
-        if (err) {
-          result.setmsg(err);
-          reject();
-        }
-        result.setdata(
-          docs.map((i) => {
-            const tem = {
-              ...i,
-              id: i._id,
-            };
-            delete tem._id;
-            delete tem.songs;
-            return tem;
-          })
-        );
-        resolve();
-      });
+      db.find(finddata)
+        .sort({ createdAt: 1 })
+        .exec((err, docs) => {
+          if (err) {
+            result.setmsg(err);
+            reject();
+          }
+          result.setdata(
+            docs.map((i) => {
+              const tem = {
+                ...i,
+                id: i._id,
+              };
+              delete tem._id;
+              delete tem.songs;
+              return tem;
+            })
+          );
+          resolve();
+        });
     });
 
     return promise;
@@ -86,12 +87,13 @@ const getsheet = (req, res) => {
   });
 };
 
-
-const test = ()=>{
-  db.find({}).sort({createdAt:1}).exec((err,doc)=>{
-    console.log("test",err,doc)
-  })
-}
+const test = () => {
+  db.find({})
+    .sort({ createdAt: 1 })
+    .exec((err, doc) => {
+      console.log("test", err, doc);
+    });
+};
 
 // // 登录的处理函数
 // const get = (req, res) => {
